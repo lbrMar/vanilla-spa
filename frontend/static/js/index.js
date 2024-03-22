@@ -9,9 +9,9 @@ const navigateTo = (url) => {
 
 const router = async () => {
   const routes = [
-    { path: '/', view: Dashboard },
-    { path: '/blog', view: Blog },
-    { path: '/settings', view: Settings },
+    { path: '/', view: () => new Dashboard },
+    { path: '/blog', view: () => new Blog },
+    { path: '/settings', view: () => new Settings },
   ]
 
   // Test each route for potential match 
@@ -24,7 +24,7 @@ const router = async () => {
 
   let match = potentialMatches.find((potentialMatch) => potentialMatch.isMatch)
 
-  const view = new match.route.view()
+  const view = match.route.view()
 
   document.querySelector('#app').innerHTML = await view.getHtml()
 
